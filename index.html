@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>Test</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <div id="state"></div>
+        <button class="power on"> power on </button>
+        <button class="power off"> power off </button>
+        <button class="volume down">vol -</button>
+        <button class="volume up">vol +</button>
+        <button class="mute">mute</button>
+        
+    </div>
+    <div>
+        <button class="source" data-ref="WIFI">wifi</button>
+        <button class="source" data-ref="BT">bluetooth</button>
+        <button class="source" data-ref="AUX">aux</button>
+        <button class="source" data-ref="USB">usb</button>
+    </div>
+    <div>
+        force check state: <button class="debug">debug</button>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+    
+        $('.power.on').on('click', function(){
+            socket.emit('power:on')
+        })
+
+        $('.power.off').on('click', function(){
+            socket.emit('power:off')
+        })
+
+        $('.volume.up').on('click', function(){
+            socket.emit('volume:up')
+        })
+
+        $('.volume.down').on('click', function(){
+            socket.emit('volume:down')
+        })
+
+        $('.mute').on('click', function(){
+            socket.emit('mute:toggle')
+        })
+
+        $('.source').on('click', function(){
+            socket.emit('source', $(this).attr('data-ref'))
+        })
+
+        $('.debug').on('click', function(){
+            socket.emit('debug');
+        });
+
+        var socket = io("http://localhost:3000");
+        socket.on('state', function (data) {
+            $('#state').text(JSON.stringify(data));
+
+        })
+    })
+</script>
+
+</html>

@@ -1,6 +1,6 @@
 # KEF wireless speaker JS test app
 
-the simplest test app for trying the [kef-wireless-js]('https://github.com/patrickdmiller/kef-wireless-js') module
+the simplest test app for trying the [kef-wireless-js](https://github.com/patrickdmiller/kef-wireless-js) module
 
 intentionally ugly
 
